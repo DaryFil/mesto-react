@@ -5,9 +5,9 @@ return (
       <h2 className="popup__title">{title}</h2>
 
       <form
-        className="popup__form popup__profile-form popup__form_avatar"
+        className="popup__form"
         name={name}
-        novalidate >
+        >
          {children}
         <button type="submit" className="popup__button-save opacity">
           {buttonText}
@@ -17,7 +17,7 @@ return (
         type="button"
         className="popup__button-close opacity"
         onClick={onClose}
-      ></button>
+      />
     </div>
   </div>
 
