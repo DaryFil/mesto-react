@@ -26,14 +26,14 @@ export default function Main({onEditProfile, onEditAvatar, onAddPlace, onCardCli
         <main className="content">
 <section className="profile">
   <div className="profile__avatar-container">
-    <img alt="фото кошки" className="profile__avatar" />
+    <img alt="фото кошки" src={userAvatar} className="profile__avatar" />
     <div className="profile__avatar-save"
     onClick={onEditAvatar}
     ></div>
   </div>
   <div className="profile__info">
     <div className="profile__title">
-      <h1 className="profile__name">Василиса Злунина</h1>
+      <h1 className="profile__name">{userName}</h1>
       <button
         type="button"
         className="profile__edit-button opacity"
@@ -41,7 +41,7 @@ export default function Main({onEditProfile, onEditAvatar, onAddPlace, onCardCli
         
       ></button>
     </div>
-    <p className="profile__about">Похититель мелких предметов</p>
+    <p className="profile__about">{userDescription}</p>
   </div>
   <button type="button" class="profile__add-button opacity"
   onClick={onAddPlace}></button>

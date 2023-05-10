@@ -4,7 +4,7 @@ export default function ImagePopup({card, onClose}) {
         <div className="popup__content">
           <button
             className="popup__button-close popup__button-close_photo-view opacity"
-            type="button"
+            type="button" onClick={onClose}
             
           ></button>
           <img className="popup__image" src={card ? card.link : '#'} alt={ card ? card.name : 'название картинки'} />
