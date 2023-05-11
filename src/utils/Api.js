@@ -13,87 +13,69 @@ class Api {
     return Promise.reject(res.status);
   }
 
-  // _request(endpoint, options) {
-  //   return fetch("${this._address}${endpoint}", options).then(
-  //     this._checkAnswer
-  //   );
-  // }
-  // не до конца поняла как именно делать код более универсальным, писала вот так, код ломается
-  // getUserInfo() {
-  // this._request(`/users/me`, {
-  //     method: "GET",
-  //headers: this._headers,
-  //   });
-  // }
+  _request(endpoint, options) {
+    return fetch(`${this._address}${endpoint}`, options).then(
+      this._checkAnswer
+    );
+  }
 
   getUserInfo() {
-    return fetch(`${this._address}/users/me`, {
+    return this._request(`/users/me`, {
       method: "GET",
-
       headers: this._headers,
-    }).then(this._checkAnswer);
+    });
   }
 
   saveUserInfo({ name, about }) {
-    return fetch(`${this._address}/users/me`, {
+    return this._request(`/users/me`, {
       method: "PATCH",
-
       headers: this._headers,
-
       body: JSON.stringify({ name: name, about: about }),
-    }).then(this._checkAnswer);
+    });
   }
 
   saveUserAvatar({ avatar }) {
-    return fetch(`${this._address}/users/me/avatar`, {
+    return this._request(`/users/me/avatar`, {
       method: "PATCH",
-
       headers: this._headers,
-
       body: JSON.stringify({ avatar: avatar }),
-    }).then(this._checkAnswer);
+    });
   }
 
   getInitialCards() {
-    return fetch(`${this._address}/cards`, {
+    return this._request(`/cards`, {
       method: "GET",
-
       headers: this._headers,
-    }).then(this._checkAnswer);
+    });
   }
 
   addNewCard({ name, link }) {
-    return fetch(`${this._address}/cards`, {
+    return this._request(`/cards`, {
       method: "POST",
-
       headers: this._headers,
-
       body: JSON.stringify({ name: name, link: link }),
-    }).then(this._checkAnswer);
+    });
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._address}/cards/${cardId}`, {
+    return this._request(`/cards/${cardId}`, {
       method: "DELETE",
-
       headers: this._headers,
-    }).then(this._checkAnswer);
+    });
   }
 
   addLike(cardId) {
-    return fetch(`${this._address}/cards/${cardId}/likes`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: "PUT",
-
       headers: this._headers,
-    }).then(this._checkAnswer);
+    });
   }
 
   removeLike(cardId) {
-    return fetch(`${this._address}/cards/${cardId}/likes`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: "DELETE",
-
       headers: this._headers,
-    }).then(this._checkAnswer);
+    });
   }
 }
 
