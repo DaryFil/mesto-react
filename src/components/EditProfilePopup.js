@@ -2,19 +2,30 @@ import { useContext, useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const EditProfilePopup = ({ isOpen, onClose }) => {
+const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
 
   // Подписка на контекст
   const currentUser = useContext(CurrentUserContext);
 
+  const handleSubmit = (e) => {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      about
+    });
+  }
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   useEffect(() => {
     setName(currentUser.name);
     setAbout(currentUser.about);
   }, [currentUser]);
+
+  
 
   return (
     <PopupWithForm
@@ -23,10 +34,11 @@ const EditProfilePopup = ({ isOpen, onClose }) => {
       buttonText={`Сохранить`}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <label className="popup__field">
         <input
-          value={name || ''}
+          value={name || ""}
           onChange={(event) => setName(event.target.value)}
           type="text"
           placeholder="Имя"
@@ -42,7 +54,7 @@ const EditProfilePopup = ({ isOpen, onClose }) => {
       </label>
       <label className="popup__field">
         <input
-          value={about || ''}
+          value={about || ""}
           onChange={(event) => setAbout(event.target.value)}
           type="text"
           placeholder="Специальность"
