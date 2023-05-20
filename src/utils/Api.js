@@ -49,14 +49,21 @@ class Api {
     });
   }
 
-  addNewCard({ name, link }) {
+  // addNewCard({ name, link }) {
+  //   return this._request(`/cards`, {
+  //     method: "POST",
+  //     headers: this._headers,
+  //     body: JSON.stringify({ name: name, link: link }),
+  //   });
+  // }
+
+  addNewCard(data) {
     return this._request(`/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ name: name, link: link }),
+      body: JSON.stringify(data),
     });
   }
-
   deleteCard(cardId) {
     return this._request(`/cards/${cardId}`, {
       method: "DELETE",

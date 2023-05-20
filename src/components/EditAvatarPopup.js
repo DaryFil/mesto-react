@@ -3,13 +3,12 @@ import { useRef } from 'react';
 
 const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
     const inputRef = useRef(null);
-
   const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateAvatar({
-        avatar: inputRef.current.value,
+        avatar: inputRef.current.value
     });
   };
 
@@ -30,7 +29,7 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
           className="popup__input popup__input_avatar"
           name="avatar"
           ref={inputRef}
-                 
+          
           required
         />
         <span className="popup__input-error avatar-error" />
