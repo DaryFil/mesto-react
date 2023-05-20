@@ -9,6 +9,7 @@ import api from "../utils/Api.js";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -64,6 +65,16 @@ function App() {
       .catch((error) => console.log(`Ошибка: ${error}`));
   }
 
+  function handleUpdateAvatar(data) {
+    api
+      .saveUserAvatar(data)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((error) => console.log(`Ошибка: ${error}`));
+  }
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cards]) => {
@@ -92,6 +103,12 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+        />
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
         />
 
         <PopupWithForm
@@ -133,26 +150,6 @@ function App() {
           buttonText={"Да"}
           onClose={closeAllPopups}
         ></PopupWithForm>
-
-        <PopupWithForm
-          className={"save-avatar"}
-          title={"Обновить аватар"}
-          buttonText={"Да"}
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <label className="popup__field">
-            <input
-              type="url"
-              placeholder="Ccылка на картинку"
-              id="avatar"
-              className="popup__input popup__input_avatar"
-              name="avatar"
-              required
-            />
-            <span className="popup__input-error avatar-error" />
-          </label>
-        </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
