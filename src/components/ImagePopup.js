@@ -1,6 +1,6 @@
-export default function ImagePopup({ card, onClose }) {
+export default function ImagePopup({ card, isOpen, onClose }) {
   return (
-    <div className={`popup popup_photo-view ${card && "popup_opened"}`}>
+    <div className={`popup popup_photo-view ${isOpen ? "popup_opened" : ""}`}>
       <div className="popup__content">
         <button
           className="popup__button-close popup__button-close_photo-view opacity"
